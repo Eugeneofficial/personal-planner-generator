@@ -2,7 +2,7 @@
 
 Генератор персональных ежедневников с поддержкой искусственного интеллекта и локальных моделей LM Studio.
 
-![Planner Generator](planner/static/img/preview.jpg)
+![Planner Generator]
 
 ## Особенности
 
@@ -123,4 +123,4 @@ personal-planner-generator/
 
 ---
 
-Сделано с ❤️ и помощью ИИ 
+Сделано с ❤️ 
