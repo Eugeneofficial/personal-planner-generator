@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Planner Templates') }}{% endblock %}
+
+{% block page_title %}{{ _('Planner Templates') }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <p class="lead">{{ _('Choose from our professionally designed templates to get started quickly. Each template includes pre-configured components tailored for specific needs.') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="templates-grid">
+    <!-- Business Planner -->
+    <div class="card template-card">
+        <img src="{{ url_for('static', filename='img/template-preview-1.jpg') }}" class="template-image" alt="{{ _('Business Planner') }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Business Planner') }}</h5>
+            <p class="card-text">{{ _('Designed for professionals with meetings, projects, and deadlines. Includes task prioritization and goal tracking.') }}</p>
+            
+            <div class="template-components">
+                <span class="component-badge">{{ _('Weekly Schedule') }}</span>
+                <span class="component-badge">{{ _('Meeting Notes') }}</span>
+                <span class="component-badge">{{ _('Project Tracker') }}</span>
+                <span class="component-badge">{{ _('Goal Setting') }}</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('index', template='business') }}" class="btn btn-primary w-100">
+                <i class="fas fa-check me-2"></i>{{ _('Use This Template') }}
+            </a>
+        </div>
+    </div>
+    
+    <!-- Academic Planner -->
+    <div class="card template-card">
+        <img src="{{ url_for('static', filename='img/template-preview-2.jpg') }}" class="template-image" alt="{{ _('Academic Planner') }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Academic Planner') }}</h5>
+            <p class="card-text">{{ _('Perfect for students with classes, assignments, and study sessions. Includes grade tracking and semester planning.') }}</p>
+            
+            <div class="template-components">
+                <span class="component-badge">{{ _('Class Schedule') }}</span>
+                <span class="component-badge">{{ _('Assignment Tracker') }}</span>
+                <span class="component-badge">{{ _('Study Log') }}</span>
+                <span class="component-badge">{{ _('Grade Tracker') }}</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('index', template='academic') }}" class="btn btn-primary w-100">
+                <i class="fas fa-check me-2"></i>{{ _('Use This Template') }}
+            </a>
+        </div>
+    </div>
+    
+    <!-- Fitness Planner -->
+    <div class="card template-card">
+        <img src="{{ url_for('static', filename='img/template-preview-3.jpg') }}" class="template-image" alt="{{ _('Fitness Planner') }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Fitness Planner') }}</h5>
+            <p class="card-text">{{ _('Track workouts, nutrition, and wellness goals. Includes progress tracking and meal planning sections.') }}</p>
+            
+            <div class="template-components">
+                <span class="component-badge">{{ _('Workout Log') }}</span>
+                <span class="component-badge">{{ _('Meal Planner') }}</span>
+                <span class="component-badge">{{ _('Progress Tracker') }}</span>
+                <span class="component-badge">{{ _('Water Intake') }}</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('index', template='fitness') }}" class="btn btn-primary w-100">
+                <i class="fas fa-check me-2"></i>{{ _('Use This Template') }}
+            </a>
+        </div>
+    </div>
+    
+    <!-- Creative Planner -->
+    <div class="card template-card">
+        <img src="{{ url_for('static', filename='img/template-preview-4.jpg') }}" class="template-image" alt="{{ _('Creative Planner') }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Creative Planner') }}</h5>
+            <p class="card-text">{{ _('For artists, writers, and creators. Includes project tracking, idea collection, and inspiration sections.') }}</p>
+            
+            <div class="template-components">
+                <span class="component-badge">{{ _('Project Timeline') }}</span>
+                <span class="component-badge">{{ _('Idea Collection') }}</span>
+                <span class="component-badge">{{ _('Inspiration Board') }}</span>
+                <span class="component-badge">{{ _('Creative Goals') }}</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('index', template='creative') }}" class="btn btn-primary w-100">
+                <i class="fas fa-check me-2"></i>{{ _('Use This Template') }}
+            </a>
+        </div>
+    </div>
+    
+    <!-- Mindfulness Planner -->
+    <div class="card template-card">
+        <img src="{{ url_for('static', filename='img/template-preview-5.jpg') }}" class="template-image" alt="{{ _('Mindfulness Planner') }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Mindfulness Planner') }}</h5>
+            <p class="card-text">{{ _('Focus on mental health, gratitude, and self-care. Includes mood tracking and reflection prompts.') }}</p>
+            
+            <div class="template-components">
+                <span class="component-badge">{{ _('Gratitude Journal') }}</span>
+                <span class="component-badge">{{ _('Mood Tracker') }}</span>
+                <span class="component-badge">{{ _('Meditation Log') }}</span>
+                <span class="component-badge">{{ _('Reflection Pages') }}</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('index', template='mindfulness') }}" class="btn btn-primary w-100">
+                <i class="fas fa-check me-2"></i>{{ _('Use This Template') }}
+            </a>
+        </div>
+    </div>
+    
+    <!-- Travel Planner -->
+    <div class="card template-card">
+        <img src="{{ url_for('static', filename='img/template-preview-6.jpg') }}" class="template-image" alt="{{ _('Travel Planner') }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Travel Planner') }}</h5>
+            <p class="card-text">{{ _('Plan trips, activities, and packing lists. Includes budget tracking and itinerary planning.') }}</p>
+            
+            <div class="template-components">
+                <span class="component-badge">{{ _('Itinerary') }}</span>
+                <span class="component-badge">{{ _('Packing List') }}</span>
+                <span class="component-badge">{{ _('Budget Tracker') }}</span>
+                <span class="component-badge">{{ _('Travel Journal') }}</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('index', template='travel') }}" class="btn btn-primary w-100">
+                <i class="fas fa-check me-2"></i>{{ _('Use This Template') }}
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5>{{ _('Need a custom planner?') }}</h5>
+                <p>{{ _('If none of these templates fit your needs, you can create a fully customized planner from scratch.') }}</p>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-plus me-2"></i>{{ _('Create Custom Planner') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

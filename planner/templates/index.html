@@ -1,0 +1,650 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Personal Planner Generator') }}{% endblock %}
+
+{% block page_title %}{{ _('Create Your Planner') }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{ _('Customize Your Planner') }}</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('generate') }}" method="post" enctype="multipart/form-data" id="plannerForm">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="plannerName" class="form-label">{{ _('Planner Name') }}</label>
+                                <input type="text" class="form-control" id="plannerName" name="planner_name" placeholder="{{ _('My Personal Planner') }}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="plannerSize" class="form-label">{{ _('Planner Size') }}</label>
+                                <select class="form-select" id="plannerSize" name="planner_size">
+                                    <option value="A4">A4 (210 × 297 mm)</option>
+                                    <option value="A5">A5 (148 × 210 mm)</option>
+                                    <option value="Letter">{{ _('Letter (8.5 × 11 in)') }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="plannerOrientation" class="form-label">{{ _('Orientation') }}</label>
+                                <div class="d-flex">
+                                    <div class="form-check me-3">
+                                        <input class="form-check-input" type="radio" name="orientation" id="orientationPortrait" value="portrait" checked>
+                                        <label class="form-check-label" for="orientationPortrait">
+                                            {{ _('Portrait') }}
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="orientation" id="orientationLandscape" value="landscape">
+                                        <label class="form-check-label" for="orientationLandscape">
+                                            {{ _('Landscape') }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">{{ _('Start Date') }}</label>
+                                <input type="date" class="form-control" id="startDate" name="start_date" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label">{{ _('End Date') }}</label>
+                                <input type="date" class="form-control" id="endDate" name="end_date" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="coverImage" class="form-label">{{ _('Cover Image (Optional)') }}</label>
+                                <input type="file" class="form-control" id="coverImage" name="cover_image" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="mb-3">{{ _('Planner Components') }}</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeYearlyOverview" name="components[]" value="yearly_overview" checked>
+                                <label class="form-check-label" for="includeYearlyOverview">
+                                    {{ _('Yearly Overview') }}
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeMonthlyCalendars" name="components[]" value="monthly_calendars" checked>
+                                <label class="form-check-label" for="includeMonthlyCalendars">
+                                    {{ _('Monthly Calendars') }}
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeWeeklyPlanners" name="components[]" value="weekly_planners" checked>
+                                <label class="form-check-label" for="includeWeeklyPlanners">
+                                    {{ _('Weekly Planners') }}
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeDailyPages" name="components[]" value="daily_pages">
+                                <label class="form-check-label" for="includeDailyPages">
+                                    {{ _('Daily Pages') }}
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeGoalTrackers" name="components[]" value="goal_trackers">
+                                <label class="form-check-label" for="includeGoalTrackers">
+                                    {{ _('Goal Trackers') }}
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="includeNotePages" name="components[]" value="note_pages">
+                                <label class="form-check-label" for="includeNotePages">
+                                    {{ _('Note Pages') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="mb-3">{{ _('Design Options') }}</h5>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="colorScheme" class="form-label">{{ _('Color Scheme') }}</label>
+                                <select class="form-select" id="colorScheme" name="color_scheme">
+                                    <option value="blue">{{ _('Blue') }}</option>
+                                    <option value="purple">{{ _('Purple') }}</option>
+                                    <option value="green">{{ _('Green') }}</option>
+                                    <option value="pink">{{ _('Pink') }}</option>
+                                    <option value="gray">{{ _('Minimalist Gray') }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="fontStyle" class="form-label">{{ _('Font Style') }}</label>
+                                <select class="form-select" id="fontStyle" name="font_style">
+                                    <option value="modern">{{ _('Modern') }}</option>
+                                    <option value="classic">{{ _('Classic') }}</option>
+                                    <option value="handwritten">{{ _('Handwritten') }}</option>
+                                    <option value="minimalist">{{ _('Minimalist') }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="layoutStyle" class="form-label">{{ _('Layout Style') }}</label>
+                                <select class="form-select" id="layoutStyle" name="layout_style">
+                                    <option value="grid">{{ _('Grid') }}</option>
+                                    <option value="minimal">{{ _('Minimal') }}</option>
+                                    <option value="creative">{{ _('Creative') }}</option>
+                                    <option value="professional">{{ _('Professional') }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="additionalElements" class="form-label">{{ _('Additional Elements') }}</label>
+                                <select class="form-select" id="additionalElements" name="additional_elements" multiple>
+                                    <option value="quotes">{{ _('Inspirational Quotes') }}</option>
+                                    <option value="habit_tracker">{{ _('Habit Tracker') }}</option>
+                                    <option value="mood_tracker">{{ _('Mood Tracker') }}</option>
+                                    <option value="expense_tracker">{{ _('Expense Tracker') }}</option>
+                                    <option value="reading_list">{{ _('Reading List') }}</option>
+                                </select>
+                                <div class="form-text">{{ _('Hold Ctrl/Cmd to select multiple options') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="personalNotes" class="form-label">{{ _('Personal Notes or Special Instructions') }}</label>
+                        <textarea class="form-control" id="personalNotes" name="personal_notes" rows="3" placeholder="{{ _('Any special requests or notes for your planner...') }}"></textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-outline-secondary me-md-2" id="previewBtn">
+                            <i class="fas fa-eye me-1"></i> {{ _('Preview') }}
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-file-pdf me-1"></i> {{ _('Generate Planner') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{ _('AI Suggestions') }}</h5>
+            </div>
+            <div class="card-body">
+                <div id="aiSuggestions">
+                    <p class="text-center text-muted">
+                        <i class="fas fa-robot mb-2" style="font-size: 2rem;"></i><br>
+                        {{ _('Select components and design options to get AI suggestions for your planner.') }}
+                    </p>
+                </div>
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-outline-primary" id="getAiSuggestionsBtn">
+                        <i class="fas fa-magic me-1"></i> {{ _('Get AI Suggestions') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{ _('Templates') }}</h5>
+            </div>
+            <div class="card-body">
+                <p>{{ _('Looking for inspiration? Check out our pre-designed templates.') }}</p>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <div class="template-preview">
+                            <img src="{{ url_for('static', filename='img/template-preview-1.jpg') }}" alt="{{ _('Business Planner') }}" class="img-fluid rounded">
+                            <div class="template-name">{{ _('Business') }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="template-preview">
+                            <img src="{{ url_for('static', filename='img/template-preview-2.jpg') }}" alt="{{ _('Academic Planner') }}" class="img-fluid rounded">
+                            <div class="template-name">{{ _('Academic') }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <a href="{{ url_for('templates') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-th-large me-1"></i> {{ _('View All Templates') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">{{ _('Planner Preview') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="previewLoading">
+                    <div class="loader mb-3"></div>
+                    <p>{{ _('Generating preview...') }}</p>
+                </div>
+                <div id="previewContent" style="display: none;">
+                    <!-- Preview content will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Close') }}</button>
+                <button type="button" class="btn btn-primary" id="generateFromPreviewBtn">
+                    <i class="fas fa-file-pdf me-1"></i> {{ _('Generate Planner') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set default dates (today and 1 year from today)
+        const today = new Date();
+        const nextYear = new Date();
+        nextYear.setFullYear(today.getFullYear() + 1);
+        
+        document.getElementById('startDate').valueAsDate = today;
+        document.getElementById('endDate').valueAsDate = nextYear;
+        
+        // Preview button
+        const previewBtn = document.getElementById('previewBtn');
+        if (previewBtn) {
+            previewBtn.addEventListener('click', function() {
+                const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+                previewModal.show();
+                
+                // Simulate loading preview
+                setTimeout(function() {
+                    document.getElementById('previewLoading').style.display = 'none';
+                    document.getElementById('previewContent').style.display = 'block';
+                    
+                    // Get form data for preview
+                    const form = document.getElementById('plannerForm');
+                    const formData = new FormData(form);
+                    
+                    // Generate preview content based on form data
+                    let previewHTML = `
+                        <div class="preview-planner">
+                            <div class="preview-cover mb-4">
+                                <h2>${formData.get('planner_name') || '{{ _("My Personal Planner") }}'}</h2>
+                                <p class="text-muted">${formData.get('start_date')} - ${formData.get('end_date')}</p>
+                            </div>
+                            
+                            <div class="preview-pages">
+                                <div class="row">
+                    `;
+                    
+                    // Add preview for selected components
+                    const components = formData.getAll('components[]');
+                    
+                    if (components.includes('yearly_overview')) {
+                        previewHTML += `
+                            <div class="col-md-6 mb-4">
+                                <div class="preview-page">
+                                    <h5>{{ _('Yearly Overview') }}</h5>
+                                    <div class="preview-page-content text-center">
+                                        <i class="fas fa-calendar-alt" style="font-size: 3rem; color: var(--primary-color);"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (components.includes('monthly_calendars')) {
+                        previewHTML += `
+                            <div class="col-md-6 mb-4">
+                                <div class="preview-page">
+                                    <h5>{{ _('Monthly Calendar') }}</h5>
+                                    <div class="preview-page-content text-center">
+                                        <i class="fas fa-calendar" style="font-size: 3rem; color: var(--primary-color);"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (components.includes('weekly_planners')) {
+                        previewHTML += `
+                            <div class="col-md-6 mb-4">
+                                <div class="preview-page">
+                                    <h5>{{ _('Weekly Planner') }}</h5>
+                                    <div class="preview-page-content text-center">
+                                        <i class="fas fa-calendar-week" style="font-size: 3rem; color: var(--primary-color);"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (components.includes('daily_pages')) {
+                        previewHTML += `
+                            <div class="col-md-6 mb-4">
+                                <div class="preview-page">
+                                    <h5>{{ _('Daily Page') }}</h5>
+                                    <div class="preview-page-content text-center">
+                                        <i class="fas fa-calendar-day" style="font-size: 3rem; color: var(--primary-color);"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    previewHTML += `
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('previewContent').innerHTML = previewHTML;
+                }, 1500);
+            });
+        }
+        
+        // Generate from preview button
+        const generateFromPreviewBtn = document.getElementById('generateFromPreviewBtn');
+        if (generateFromPreviewBtn) {
+            generateFromPreviewBtn.addEventListener('click', function() {
+                document.getElementById('plannerForm').submit();
+            });
+        }
+        
+        // AI Suggestions button
+        const getAiSuggestionsBtn = document.getElementById('getAiSuggestionsBtn');
+        if (getAiSuggestionsBtn) {
+            getAiSuggestionsBtn.addEventListener('click', function() {
+                const aiSuggestions = document.getElementById('aiSuggestions');
+                aiSuggestions.innerHTML = `
+                    <div class="text-center mb-3">
+                        <div class="loader"></div>
+                        <p class="mt-2">{{ _('Generating AI suggestions...') }}</p>
+                    </div>
+                `;
+                
+                // Get current AI model
+                const currentAiProvider = localStorage.getItem('currentAiProvider') || 'openai';
+                
+                // Get form data for context
+                const form = document.getElementById('plannerForm');
+                const formData = new FormData(form);
+                
+                // Create a prompt based on form data
+                let prompt = "I'm creating a planner with the following components: ";
+                
+                // Add selected components to prompt
+                if (formData.has('todo')) prompt += "to-do list, ";
+                if (formData.has('habit_tracker')) prompt += "habit tracker, ";
+                if (formData.has('schedule')) prompt += "schedule, ";
+                if (formData.has('notes')) prompt += "notes, ";
+                if (formData.has('mood_tracker')) prompt += "mood tracker, ";
+                if (formData.has('water_tracker')) prompt += "water tracker, ";
+                if (formData.has('goal_setting')) prompt += "goal setting, ";
+                if (formData.has('reflection')) prompt += "reflection, ";
+                if (formData.has('gratitude')) prompt += "gratitude, ";
+                
+                // Add style to prompt
+                const style = formData.get('style');
+                prompt += `with a ${style} style. `;
+                
+                // Add time range to prompt
+                const timeRange = formData.get('time_range');
+                prompt += `The planner is for a ${timeRange}. `;
+                
+                // Add request for suggestions
+                prompt += "What other components or features would you suggest to enhance my planner?";
+                
+                // Make API request to get AI suggestions
+                fetch('/api/ai-suggestions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        provider: currentAiProvider
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Check if we have suggestions
+                    if (data.suggestions && data.suggestions.length > 0) {
+                        // Get provider info for styling
+                        let providerColor = 'var(--primary-color)';
+                        let providerIcon = 'fas fa-robot';
+                        let providerName = currentAiProvider.charAt(0).toUpperCase() + currentAiProvider.slice(1);
+                        
+                        // Set provider-specific styling
+                        if (currentAiProvider === 'openai') {
+                            providerColor = 'var(--openai-color)';
+                            providerIcon = 'fas fa-comment-dots';
+                        } else if (currentAiProvider === 'anthropic') {
+                            providerColor = 'var(--anthropic-color)';
+                            providerIcon = 'fas fa-feather-alt';
+                        } else if (currentAiProvider === 'google') {
+                            providerColor = 'var(--google-color)';
+                            providerIcon = 'fas fa-brain';
+                        } else if (currentAiProvider === 'lmstudio') {
+                            providerColor = 'var(--lmstudio-color)';
+                            providerIcon = 'fas fa-laptop-code';
+                        }
+                        
+                        // Clear previous content
+                        aiSuggestions.innerHTML = '';
+                        
+                        // Add each suggestion
+                        data.suggestions.forEach((suggestion, index) => {
+                            const suggestionElement = document.createElement('div');
+                            suggestionElement.className = 'ai-suggestion';
+                            suggestionElement.innerHTML = `
+                                <div class="ai-suggestion-header">
+                                    <i class="${providerIcon} ai-suggestion-icon" style="color: ${providerColor};"></i>
+                                    <h6 class="ai-suggestion-title">${providerName} ${_('Suggestion')} ${index + 1}</h6>
+                                </div>
+                                <h5>${suggestion.title}</h5>
+                                <p class="ai-suggestion-content">${suggestion.description}</p>
+                                <div class="ai-suggestion-actions">
+                                    <button class="btn btn-sm btn-outline-primary apply-suggestion-btn" data-suggestion="${index}">
+                                        <i class="fas fa-check me-1"></i> {{ _('Apply') }}
+                                    </button>
+                                </div>
+                            `;
+                            aiSuggestions.appendChild(suggestionElement);
+                        });
+                        
+                        // Add refresh button at the bottom
+                        const refreshButton = document.createElement('div');
+                        refreshButton.className = 'text-center mt-3';
+                        refreshButton.innerHTML = `
+                            <button class="btn btn-outline-secondary refresh-suggestion-btn">
+                                <i class="fas fa-sync-alt me-1"></i> {{ _('Get New Suggestions') }}
+                            </button>
+                        `;
+                        aiSuggestions.appendChild(refreshButton);
+                        
+                        // Add event listeners to apply buttons
+                        document.querySelectorAll('.apply-suggestion-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const suggestionIndex = this.getAttribute('data-suggestion');
+                                const suggestion = data.suggestions[suggestionIndex];
+                                
+                                // Apply the suggestion based on its title
+                                applySuggestion(suggestion);
+                                
+                                // Show success message
+                                showToast('{{ _("Suggestion applied successfully!") }}', 'success');
+                            });
+                        });
+                        
+                        // Add event listener to refresh button
+                        document.querySelector('.refresh-suggestion-btn').addEventListener('click', function() {
+                            getAiSuggestionsBtn.click();
+                        });
+                    } else {
+                        // No suggestions received
+                        aiSuggestions.innerHTML = `
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                {{ _('No suggestions available at this time. Please try again later.') }}
+                            </div>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching AI suggestions:', error);
+                    
+                    // Show error message
+                    aiSuggestions.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            {{ _('Error getting AI suggestions. Please check if the API key is configured correctly in Settings.') }}
+                        </div>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-outline-secondary refresh-suggestion-btn">
+                                <i class="fas fa-sync-alt me-1"></i> {{ _('Try Again') }}
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Add event listener to refresh button
+                    document.querySelector('.refresh-suggestion-btn').addEventListener('click', function() {
+                        getAiSuggestionsBtn.click();
+                    });
+                });
+            });
+        }
+        
+        // Function to apply a suggestion to the form
+        function applySuggestion(suggestion) {
+            // Get the title and convert to lowercase for easier matching
+            const title = suggestion.title.toLowerCase();
+            
+            // Check for component suggestions
+            if (title.includes('habit tracker') || title.includes('add habit')) {
+                document.getElementById('habitTrackerCheck').checked = true;
+            }
+            if (title.includes('mood tracker') || title.includes('add mood')) {
+                document.getElementById('moodTrackerCheck').checked = true;
+            }
+            if (title.includes('water tracker') || title.includes('add water')) {
+                document.getElementById('waterTrackerCheck').checked = true;
+            }
+            if (title.includes('goal setting') || title.includes('add goal')) {
+                document.getElementById('goalSettingCheck').checked = true;
+            }
+            if (title.includes('reflection') || title.includes('add reflection')) {
+                document.getElementById('reflectionCheck').checked = true;
+            }
+            if (title.includes('gratitude') || title.includes('add gratitude')) {
+                document.getElementById('gratitudeCheck').checked = true;
+            }
+            
+            // Check for style suggestions
+            if (title.includes('style: minimalist') || title.includes('minimalist style')) {
+                document.getElementById('styleMinimalist').checked = true;
+            }
+            if (title.includes('style: colorful') || title.includes('colorful style')) {
+                document.getElementById('styleColorful').checked = true;
+            }
+            if (title.includes('style: illustrated') || title.includes('illustrated style')) {
+                document.getElementById('styleIllustrated').checked = true;
+            }
+            
+            // Update the preview
+            updatePreview();
+        }
+        
+        // Style preview pages
+        const style = document.createElement('style');
+        style.textContent = `
+            .preview-planner {
+                font-family: var(--body-font);
+            }
+            
+            .preview-cover {
+                text-align: center;
+                padding: 2rem;
+                background-color: var(--light-color);
+                border-radius: var(--border-radius-md);
+            }
+            
+            .preview-page {
+                border: 1px solid var(--light-color-dark);
+                border-radius: var(--border-radius-md);
+                overflow: hidden;
+                height: 100%;
+            }
+            
+            .preview-page h5 {
+                background-color: var(--primary-color);
+                color: white;
+                margin: 0;
+                padding: 0.75rem;
+                font-size: 1rem;
+                text-align: center;
+            }
+            
+            .preview-page-content {
+                padding: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 150px;
+            }
+            
+            .template-preview {
+                position: relative;
+                cursor: pointer;
+                transition: transform var(--transition-fast);
+            }
+            
+            .template-preview:hover {
+                transform: translateY(-5px);
+            }
+            
+            .template-name {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 0.5rem;
+                text-align: center;
+                font-size: 0.9rem;
+                border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+            }
+        `;
+        document.head.appendChild(style);
+    });
+</script>
+{% endblock %} 

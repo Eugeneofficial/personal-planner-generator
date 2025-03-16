@@ -1,0 +1,518 @@
+# English translations for Personal Planner Generator.
+# Copyright (C) 2025 Personal Planner Generator
+# This file is distributed under the same license as the Personal Planner Generator project.
+msgid ""
+msgstr ""
+"Project-Id-Version: Personal Planner Generator 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# General
+msgid "Personal Planner Generator"
+msgstr "Personal Planner Generator"
+
+msgid "Create Your Planner"
+msgstr "Create Your Planner"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Templates"
+msgstr "Templates"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "AI Suggestions"
+msgstr "AI Suggestions"
+
+msgid "AI Model"
+msgstr "AI Model"
+
+msgid "Configure API Keys"
+msgstr "Configure API Keys"
+
+msgid "Generate Planner"
+msgstr "Generate Planner"
+
+msgid "Privacy"
+msgstr "Privacy"
+
+msgid "Terms"
+msgstr "Terms"
+
+msgid "Help"
+msgstr "Help"
+
+# Index page
+msgid "Customize Your Planner"
+msgstr "Customize Your Planner"
+
+msgid "Planner Name"
+msgstr "Planner Name"
+
+msgid "My Personal Planner"
+msgstr "My Personal Planner"
+
+msgid "Planner Size"
+msgstr "Planner Size"
+
+msgid "Letter (8.5 × 11 in)"
+msgstr "Letter (8.5 × 11 in)"
+
+msgid "Orientation"
+msgstr "Orientation"
+
+msgid "Portrait"
+msgstr "Portrait"
+
+msgid "Landscape"
+msgstr "Landscape"
+
+msgid "Start Date"
+msgstr "Start Date"
+
+msgid "End Date"
+msgstr "End Date"
+
+msgid "Cover Image (Optional)"
+msgstr "Cover Image (Optional)"
+
+msgid "Planner Components"
+msgstr "Planner Components"
+
+msgid "Yearly Overview"
+msgstr "Yearly Overview"
+
+msgid "Monthly Calendars"
+msgstr "Monthly Calendars"
+
+msgid "Weekly Planners"
+msgstr "Weekly Planners"
+
+msgid "Daily Pages"
+msgstr "Daily Pages"
+
+msgid "Goal Trackers"
+msgstr "Goal Trackers"
+
+msgid "Note Pages"
+msgstr "Note Pages"
+
+msgid "Design Options"
+msgstr "Design Options"
+
+msgid "Color Scheme"
+msgstr "Color Scheme"
+
+msgid "Blue"
+msgstr "Blue"
+
+msgid "Purple"
+msgstr "Purple"
+
+msgid "Green"
+msgstr "Green"
+
+msgid "Pink"
+msgstr "Pink"
+
+msgid "Minimalist Gray"
+msgstr "Minimalist Gray"
+
+msgid "Font Style"
+msgstr "Font Style"
+
+msgid "Modern"
+msgstr "Modern"
+
+msgid "Classic"
+msgstr "Classic"
+
+msgid "Handwritten"
+msgstr "Handwritten"
+
+msgid "Minimalist"
+msgstr "Minimalist"
+
+msgid "Layout Style"
+msgstr "Layout Style"
+
+msgid "Grid"
+msgstr "Grid"
+
+msgid "Minimal"
+msgstr "Minimal"
+
+msgid "Creative"
+msgstr "Creative"
+
+msgid "Professional"
+msgstr "Professional"
+
+msgid "Additional Elements"
+msgstr "Additional Elements"
+
+msgid "Inspirational Quotes"
+msgstr "Inspirational Quotes"
+
+msgid "Habit Tracker"
+msgstr "Habit Tracker"
+
+msgid "Mood Tracker"
+msgstr "Mood Tracker"
+
+msgid "Expense Tracker"
+msgstr "Expense Tracker"
+
+msgid "Reading List"
+msgstr "Reading List"
+
+msgid "Hold Ctrl/Cmd to select multiple options"
+msgstr "Hold Ctrl/Cmd to select multiple options"
+
+msgid "Personal Notes or Special Instructions"
+msgstr "Personal Notes or Special Instructions"
+
+msgid "Any special requests or notes for your planner..."
+msgstr "Any special requests or notes for your planner..."
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Select components and design options to get AI suggestions for your planner."
+msgstr "Select components and design options to get AI suggestions for your planner."
+
+msgid "Get AI Suggestions"
+msgstr "Get AI Suggestions"
+
+msgid "Looking for inspiration? Check out our pre-designed templates."
+msgstr "Looking for inspiration? Check out our pre-designed templates."
+
+msgid "Business"
+msgstr "Business"
+
+msgid "Academic"
+msgstr "Academic"
+
+msgid "View All Templates"
+msgstr "View All Templates"
+
+msgid "Planner Preview"
+msgstr "Planner Preview"
+
+msgid "Generating preview..."
+msgstr "Generating preview..."
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Generating AI suggestions..."
+msgstr "Generating AI suggestions..."
+
+msgid "Based on your selections, I recommend adding habit trackers and mood trackers to complement your weekly planners. This combination helps track progress on goals while monitoring emotional well-being."
+msgstr "Based on your selections, I recommend adding habit trackers and mood trackers to complement your weekly planners. This combination helps track progress on goals while monitoring emotional well-being."
+
+msgid "I notice you've selected a professional layout. Consider adding expense tracking to enhance your planner's functionality. This would complement your organizational style and provide valuable financial insights."
+msgstr "I notice you've selected a professional layout. Consider adding expense tracking to enhance your planner's functionality. This would complement your organizational style and provide valuable financial insights."
+
+msgid "Your planner configuration would benefit from adding reading list pages. Based on your selections, you appear to value comprehensive organization, and this addition would help track your learning goals."
+msgstr "Your planner configuration would benefit from adding reading list pages. Based on your selections, you appear to value comprehensive organization, and this addition would help track your learning goals."
+
+msgid "Hey there! Your planner looks great, but it's missing something fun - how about adding inspirational quotes? They'll give you that extra motivation boost when you're planning your week!"
+msgstr "Hey there! Your planner looks great, but it's missing something fun - how about adding inspirational quotes? They'll give you that extra motivation boost when you're planning your week!"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Suggestion applied successfully!"
+msgstr "Suggestion applied successfully!"
+
+msgid "Monthly Calendar"
+msgstr "Monthly Calendar"
+
+msgid "Weekly Planner"
+msgstr "Weekly Planner"
+
+msgid "Daily Page"
+msgstr "Daily Page"
+
+# Templates page
+msgid "Planner Templates"
+msgstr "Planner Templates"
+
+msgid "Choose from our professionally designed templates to get started quickly. Each template includes pre-configured components tailored for specific needs."
+msgstr "Choose from our professionally designed templates to get started quickly. Each template includes pre-configured components tailored for specific needs."
+
+msgid "Business Planner"
+msgstr "Business Planner"
+
+msgid "Designed for professionals with meetings, projects, and deadlines. Includes task prioritization and goal tracking."
+msgstr "Designed for professionals with meetings, projects, and deadlines. Includes task prioritization and goal tracking."
+
+msgid "Weekly Schedule"
+msgstr "Weekly Schedule"
+
+msgid "Meeting Notes"
+msgstr "Meeting Notes"
+
+msgid "Project Tracker"
+msgstr "Project Tracker"
+
+msgid "Goal Setting"
+msgstr "Goal Setting"
+
+msgid "Use This Template"
+msgstr "Use This Template"
+
+msgid "Academic Planner"
+msgstr "Academic Planner"
+
+msgid "Perfect for students with classes, assignments, and study sessions. Includes grade tracking and semester planning."
+msgstr "Perfect for students with classes, assignments, and study sessions. Includes grade tracking and semester planning."
+
+msgid "Class Schedule"
+msgstr "Class Schedule"
+
+msgid "Assignment Tracker"
+msgstr "Assignment Tracker"
+
+msgid "Study Log"
+msgstr "Study Log"
+
+msgid "Grade Tracker"
+msgstr "Grade Tracker"
+
+msgid "Fitness Planner"
+msgstr "Fitness Planner"
+
+msgid "Track workouts, nutrition, and wellness goals. Includes progress tracking and meal planning sections."
+msgstr "Track workouts, nutrition, and wellness goals. Includes progress tracking and meal planning sections."
+
+msgid "Workout Log"
+msgstr "Workout Log"
+
+msgid "Meal Planner"
+msgstr "Meal Planner"
+
+msgid "Progress Tracker"
+msgstr "Progress Tracker"
+
+msgid "Water Intake"
+msgstr "Water Intake"
+
+msgid "Creative Planner"
+msgstr "Creative Planner"
+
+msgid "For artists, writers, and creators. Includes project tracking, idea collection, and inspiration sections."
+msgstr "For artists, writers, and creators. Includes project tracking, idea collection, and inspiration sections."
+
+msgid "Project Timeline"
+msgstr "Project Timeline"
+
+msgid "Idea Collection"
+msgstr "Idea Collection"
+
+msgid "Inspiration Board"
+msgstr "Inspiration Board"
+
+msgid "Creative Goals"
+msgstr "Creative Goals"
+
+msgid "Mindfulness Planner"
+msgstr "Mindfulness Planner"
+
+msgid "Focus on mental health, gratitude, and self-care. Includes mood tracking and reflection prompts."
+msgstr "Focus on mental health, gratitude, and self-care. Includes mood tracking and reflection prompts."
+
+msgid "Gratitude Journal"
+msgstr "Gratitude Journal"
+
+msgid "Meditation Log"
+msgstr "Meditation Log"
+
+msgid "Reflection Pages"
+msgstr "Reflection Pages"
+
+msgid "Travel Planner"
+msgstr "Travel Planner"
+
+msgid "Plan trips, activities, and packing lists. Includes budget tracking and itinerary planning."
+msgstr "Plan trips, activities, and packing lists. Includes budget tracking and itinerary planning."
+
+msgid "Itinerary"
+msgstr "Itinerary"
+
+msgid "Packing List"
+msgstr "Packing List"
+
+msgid "Budget Tracker"
+msgstr "Budget Tracker"
+
+msgid "Travel Journal"
+msgstr "Travel Journal"
+
+msgid "Need a custom planner?"
+msgstr "Need a custom planner?"
+
+msgid "If none of these templates fit your needs, you can create a fully customized planner from scratch."
+msgstr "If none of these templates fit your needs, you can create a fully customized planner from scratch."
+
+msgid "Create Custom Planner"
+msgstr "Create Custom Planner"
+
+# Settings page
+msgid "API Keys"
+msgstr "API Keys"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Appearance"
+msgstr "Appearance"
+
+msgid "Configure AI Model API Keys"
+msgstr "Configure AI Model API Keys"
+
+msgid "To use AI features, you need to provide API keys for the AI models you want to use. Your API keys are stored securely and are only used to make requests to the respective AI services."
+msgstr "To use AI features, you need to provide API keys for the AI models you want to use. Your API keys are stored securely and are only used to make requests to the respective AI services."
+
+msgid "Configured"
+msgstr "Configured"
+
+msgid "Not Configured"
+msgstr "Not Configured"
+
+msgid "OpenAI API Key"
+msgstr "OpenAI API Key"
+
+msgid "Get your API key from"
+msgstr "Get your API key from"
+
+msgid "Base URL (Optional)"
+msgstr "Base URL (Optional)"
+
+msgid "Only change this if you're using a custom OpenAI-compatible API endpoint"
+msgstr "Only change this if you're using a custom OpenAI-compatible API endpoint"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Test"
+msgstr "Test"
+
+msgid "Anthropic API Key"
+msgstr "Anthropic API Key"
+
+msgid "Only change this if you're using a custom Claude-compatible API endpoint"
+msgstr "Only change this if you're using a custom Claude-compatible API endpoint"
+
+msgid "Google API Key"
+msgstr "Google API Key"
+
+msgid "Only change this if you're using a custom Gemini-compatible API endpoint"
+msgstr "Only change this if you're using a custom Gemini-compatible API endpoint"
+
+msgid "LM Studio Server URL"
+msgstr "LM Studio Server URL"
+
+msgid "Enter the URL of your local LM Studio server. Make sure LM Studio is running with the server enabled."
+msgstr "Enter the URL of your local LM Studio server. Make sure LM Studio is running with the server enabled."
+
+msgid "API Key (Optional)"
+msgstr "API Key (Optional)"
+
+msgid "Leave empty for no authentication"
+msgstr "Leave empty for no authentication"
+
+msgid "Only required if your LM Studio server is configured to use authentication"
+msgstr "Only required if your LM Studio server is configured to use authentication"
+
+msgid "Test Connection"
+msgstr "Test Connection"
+
+msgid "Language Settings"
+msgstr "Language Settings"
+
+msgid "Choose your preferred language for the application interface."
+msgstr "Choose your preferred language for the application interface."
+
+msgid "English language"
+msgstr "English language"
+
+msgid "Russian language"
+msgstr "Russian language"
+
+msgid "Language changes will take effect immediately."
+msgstr "Language changes will take effect immediately."
+
+msgid "Appearance Settings"
+msgstr "Appearance Settings"
+
+msgid "Customize the look and feel of the application."
+msgstr "Customize the look and feel of the application."
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "Light Mode"
+msgstr "Light Mode"
+
+msgid "Dark Mode"
+msgstr "Dark Mode"
+
+msgid "Accessibility"
+msgstr "Accessibility"
+
+msgid "High Contrast Mode"
+msgstr "High Contrast Mode"
+
+msgid "Font Size"
+msgstr "Font Size"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Large"
+msgstr "Large"
+
+msgid "Larger"
+msgstr "Larger"
+
+# Notifications
+msgid "Notification"
+msgstr "Notification"
+
+msgid "Please configure API key for this provider in Settings"
+msgstr "Please configure API key for this provider in Settings"
+
+msgid "AI model changed to"
+msgstr "AI model changed to"
+
+# Accessibility
+msgid "Increase font size"
+msgstr "Increase font size"
+
+msgid "Decrease font size"
+msgstr "Decrease font size"
+
+msgid "Toggle high contrast"
+msgstr "Toggle high contrast"
+
+msgid "Toggle theme"
+msgstr "Toggle theme"
+
+# Create beautiful, customized planners for your daily productivity with AI assistance
+msgid "Create beautiful, customized planners for your daily productivity with AI assistance"
+msgstr "Create beautiful, customized planners for your daily productivity with AI assistance" 

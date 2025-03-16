@@ -1,0 +1,387 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Settings') }} - {{ _('Personal Planner Generator') }}{% endblock %}
+
+{% block page_title %}{{ _('Settings') }}{% endblock %}
+
+{% block content %}
+<div class="card settings-card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="settingsTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="api-keys-tab" data-bs-toggle="tab" data-bs-target="#api-keys" type="button" role="tab" aria-controls="api-keys" aria-selected="true">
+                    <i class="fas fa-key me-2"></i>{{ _('API Keys') }}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="language-tab" data-bs-toggle="tab" data-bs-target="#language" type="button" role="tab" aria-controls="language" aria-selected="false">
+                    <i class="fas fa-language me-2"></i>{{ _('Language') }}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="appearance-tab" data-bs-toggle="tab" data-bs-target="#appearance" type="button" role="tab" aria-controls="appearance" aria-selected="false">
+                    <i class="fas fa-palette me-2"></i>{{ _('Appearance') }}
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content settings-tab-content" id="settingsTabsContent">
+            <!-- API Keys Tab -->
+            <div class="tab-pane fade show active" id="api-keys" role="tabpanel" aria-labelledby="api-keys-tab">
+                <h5 class="mb-4">{{ _('Configure AI Model API Keys') }}</h5>
+                <p class="mb-4">{{ _('To use AI features, you need to provide API keys for the AI models you want to use. Your API keys are stored securely and are only used to make requests to the respective AI services.') }}</p>
+                
+                <div class="accordion" id="apiKeysAccordion">
+                    <!-- OpenAI (ChatGPT) -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="openaiHeading">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#openaiCollapse" aria-expanded="true" aria-controls="openaiCollapse">
+                                <i class="fas fa-comment-dots me-2" style="color: var(--openai-color);"></i>
+                                <span>OpenAI (ChatGPT)</span>
+                                {% if masked_keys.get('openai', '') %}
+                                <span class="badge bg-success ms-2">{{ _('Configured') }}</span>
+                                {% else %}
+                                <span class="badge bg-warning ms-2">{{ _('Not Configured') }}</span>
+                                {% endif %}
+                            </button>
+                        </h2>
+                        <div id="openaiCollapse" class="accordion-collapse collapse show" aria-labelledby="openaiHeading" data-bs-parent="#apiKeysAccordion">
+                            <div class="accordion-body">
+                                <form class="api-key-form" data-provider="openai">
+                                    <div class="mb-3">
+                                        <label for="openaiApiKey" class="form-label">{{ _('OpenAI API Key') }}</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control api-key-input" id="openaiApiKey" placeholder="sk-..." value="{{ masked_keys.get('openai', '') }}">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#openaiApiKey">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-text">{{ _('Get your API key from') }} <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI</a></div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="openaiBaseUrl" class="form-label">{{ _('Base URL (Optional)') }}</label>
+                                        <input type="text" class="form-control base-url-input" id="openaiBaseUrl" placeholder="https://api.openai.com/v1" value="{{ masked_keys.get('openai_base_url', '') }}">
+                                        <div class="form-text">{{ _('Only change this if you\'re using a custom OpenAI-compatible API endpoint') }}</div>
+                                    </div>
+                                    
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary me-2">{{ _('Save') }}</button>
+                                        <button type="button" class="btn btn-outline-secondary test-api-key" data-provider="openai">{{ _('Test') }}</button>
+                                    </div>
+                                    
+                                    <div class="api-key-status mt-3"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Anthropic (Claude) -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="anthropicHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#anthropicCollapse" aria-expanded="false" aria-controls="anthropicCollapse">
+                                <i class="fas fa-feather-alt me-2" style="color: var(--anthropic-color);"></i>
+                                <span>Anthropic (Claude)</span>
+                                {% if masked_keys.get('anthropic', '') %}
+                                <span class="badge bg-success ms-2">{{ _('Configured') }}</span>
+                                {% else %}
+                                <span class="badge bg-warning ms-2">{{ _('Not Configured') }}</span>
+                                {% endif %}
+                            </button>
+                        </h2>
+                        <div id="anthropicCollapse" class="accordion-collapse collapse" aria-labelledby="anthropicHeading" data-bs-parent="#apiKeysAccordion">
+                            <div class="accordion-body">
+                                <form class="api-key-form" data-provider="anthropic">
+                                    <div class="mb-3">
+                                        <label for="anthropicApiKey" class="form-label">{{ _('Anthropic API Key') }}</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control api-key-input" id="anthropicApiKey" placeholder="sk-ant-..." value="{{ masked_keys.get('anthropic', '') }}">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#anthropicApiKey">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-text">{{ _('Get your API key from') }} <a href="https://console.anthropic.com/keys" target="_blank">Anthropic</a></div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="anthropicBaseUrl" class="form-label">{{ _('Base URL (Optional)') }}</label>
+                                        <input type="text" class="form-control base-url-input" id="anthropicBaseUrl" placeholder="https://api.anthropic.com" value="{{ masked_keys.get('anthropic_base_url', '') }}">
+                                        <div class="form-text">{{ _('Only change this if you\'re using a custom Claude-compatible API endpoint') }}</div>
+                                    </div>
+                                    
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary me-2">{{ _('Save') }}</button>
+                                        <button type="button" class="btn btn-outline-secondary test-api-key" data-provider="anthropic">{{ _('Test') }}</button>
+                                    </div>
+                                    
+                                    <div class="api-key-status mt-3"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Google (Gemini) -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="googleHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#googleCollapse" aria-expanded="false" aria-controls="googleCollapse">
+                                <i class="fas fa-brain me-2" style="color: var(--google-color);"></i>
+                                <span>Google (Gemini)</span>
+                                {% if masked_keys.get('google', '') %}
+                                <span class="badge bg-success ms-2">{{ _('Configured') }}</span>
+                                {% else %}
+                                <span class="badge bg-warning ms-2">{{ _('Not Configured') }}</span>
+                                {% endif %}
+                            </button>
+                        </h2>
+                        <div id="googleCollapse" class="accordion-collapse collapse" aria-labelledby="googleHeading" data-bs-parent="#apiKeysAccordion">
+                            <div class="accordion-body">
+                                <form class="api-key-form" data-provider="google">
+                                    <div class="mb-3">
+                                        <label for="googleApiKey" class="form-label">{{ _('Google API Key') }}</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control api-key-input" id="googleApiKey" placeholder="AIza..." value="{{ masked_keys.get('google', '') }}">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#googleApiKey">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-text">{{ _('Get your API key from') }} <a href="https://ai.google.dev/" target="_blank">Google AI Studio</a></div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="googleBaseUrl" class="form-label">{{ _('Base URL (Optional)') }}</label>
+                                        <input type="text" class="form-control base-url-input" id="googleBaseUrl" placeholder="https://generativelanguage.googleapis.com" value="{{ masked_keys.get('google_base_url', '') }}">
+                                        <div class="form-text">{{ _('Only change this if you\'re using a custom Gemini-compatible API endpoint') }}</div>
+                                    </div>
+                                    
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary me-2">{{ _('Save') }}</button>
+                                        <button type="button" class="btn btn-outline-secondary test-api-key" data-provider="google">{{ _('Test') }}</button>
+                                    </div>
+                                    
+                                    <div class="api-key-status mt-3"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- LM Studio (Local) -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="lmstudioHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lmstudioCollapse" aria-expanded="false" aria-controls="lmstudioCollapse">
+                                <i class="fas fa-robot me-2" style="color: var(--lmstudio-color);"></i>
+                                <span>LM Studio (Local)</span>
+                                {% if masked_keys.get('lmstudio', '') or masked_keys.get('lmstudio_base_url', '') %}
+                                <span class="badge bg-success ms-2">{{ _('Configured') }}</span>
+                                {% else %}
+                                <span class="badge bg-warning ms-2">{{ _('Not Configured') }}</span>
+                                {% endif %}
+                            </button>
+                        </h2>
+                        <div id="lmstudioCollapse" class="accordion-collapse collapse" aria-labelledby="lmstudioHeading" data-bs-parent="#apiKeysAccordion">
+                            <div class="accordion-body">
+                                <form class="api-key-form" data-provider="lmstudio">
+                                    <div class="mb-3">
+                                        <label for="lmstudioBaseUrl" class="form-label">{{ _('LM Studio Server URL') }}</label>
+                                        <input type="text" class="form-control base-url-input" id="lmstudioBaseUrl" placeholder="http://127.0.0.1:1234/v1" value="{{ masked_keys.get('lmstudio_base_url', 'http://127.0.0.1:1234/v1') }}">
+                                        <div class="form-text">{{ _('Enter the URL of your local LM Studio server. Make sure LM Studio is running with the server enabled.') }}</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="lmstudioModel" class="form-label">{{ _('LM Studio Model') }}</label>
+                                        <select class="form-select model-select" id="lmstudioModel" name="lmstudio_model">
+                                            {% for model in config.AI_MODELS['lmstudio']['models'] %}
+                                            <option value="{{ model }}" {% if masked_keys.get('lmstudio_model') == model %}selected{% endif %}>{{ model }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <div class="form-text">{{ _('Select the model you want to use with LM Studio. Make sure the model is loaded in LM Studio.') }}</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="lmstudioApiKey" class="form-label">{{ _('API Key (Optional)') }}</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control api-key-input" id="lmstudioApiKey" placeholder="{{ _('Leave empty for no authentication') }}" value="{{ masked_keys.get('lmstudio', '') }}">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#lmstudioApiKey">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-text">{{ _('Only required if your LM Studio server is configured to use authentication') }}</div>
+                                    </div>
+                                    
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary me-2">{{ _('Save') }}</button>
+                                        <button type="button" class="btn btn-outline-secondary test-api-key" data-provider="lmstudio">{{ _('Test Connection') }}</button>
+                                    </div>
+                                    
+                                    <div class="api-key-status mt-3"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Language Tab -->
+            <div class="tab-pane fade" id="language" role="tabpanel" aria-labelledby="language-tab">
+                <h5 class="mb-4">{{ _('Language Settings') }}</h5>
+                <p class="mb-4">{{ _('Choose your preferred language for the application interface.') }}</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="language-btn {% if session.get('language', 'en') == 'en' %}active{% endif %}" data-language="en">
+                            <i class="flag-icon flag-icon-us"></i>
+                            <div class="language-btn-content">
+                                <div class="language-btn-title">English</div>
+                                <div class="language-btn-subtitle">{{ _('English language') }}</div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="language-btn {% if session.get('language', 'en') == 'ru' %}active{% endif %}" data-language="ru">
+                            <i class="flag-icon flag-icon-ru"></i>
+                            <div class="language-btn-content">
+                                <div class="language-btn-title">Русский</div>
+                                <div class="language-btn-subtitle">{{ _('Russian language') }}</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    {{ _('Language changes will take effect immediately.') }}
+                </div>
+            </div>
+            
+            <!-- Appearance Tab -->
+            <div class="tab-pane fade" id="appearance" role="tabpanel" aria-labelledby="appearance-tab">
+                <h5 class="mb-4">{{ _('Appearance Settings') }}</h5>
+                <p class="mb-4">{{ _('Customize the look and feel of the application.') }}</p>
+                
+                <h6 class="mb-3">{{ _('Theme') }}</h6>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <button class="theme-btn theme-btn-light" data-theme="light">
+                            <i class="fas fa-sun"></i>
+                            <div class="theme-btn-title">{{ _('Light Mode') }}</div>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="theme-btn theme-btn-dark" data-theme="dark">
+                            <i class="fas fa-moon"></i>
+                            <div class="theme-btn-title">{{ _('Dark Mode') }}</div>
+                        </button>
+                    </div>
+                </div>
+                
+                <h6 class="mb-3">{{ _('Accessibility') }}</h6>
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="highContrastSwitch">
+                    <label class="form-check-label" for="highContrastSwitch">{{ _('High Contrast Mode') }}</label>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="fontSizeRange" class="form-label">{{ _('Font Size') }}</label>
+                    <input type="range" class="form-range" min="0" max="2" step="1" id="fontSizeRange">
+                    <div class="d-flex justify-content-between">
+                        <span>{{ _('Normal') }}</span>
+                        <span>{{ _('Large') }}</span>
+                        <span>{{ _('Larger') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet">
+<style>
+    .settings-card {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+    
+    .nav-tabs .nav-link {
+        border-radius: 0.5rem 0.5rem 0 0;
+        padding: 0.75rem 1.25rem;
+        font-weight: 500;
+    }
+    
+    .nav-tabs .nav-link.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(var(--primary-color-rgb), 0.1);
+        color: var(--primary-color);
+    }
+    
+    .accordion-button:focus {
+        box-shadow: 0 0 0 0.25rem rgba(var(--primary-color-rgb), 0.25);
+    }
+    
+    .accordion-item {
+        border-radius: var(--border-radius) !important;
+        overflow: hidden;
+    }
+    
+    .theme-btn.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize high contrast switch
+        const highContrastSwitch = document.getElementById('highContrastSwitch');
+        if (highContrastSwitch) {
+            // Set initial state
+            highContrastSwitch.checked = localStorage.getItem('highContrast') === 'true';
+            
+            // Add event listener
+            highContrastSwitch.addEventListener('change', function() {
+                document.body.classList.toggle('high-contrast', this.checked);
+                localStorage.setItem('highContrast', this.checked);
+            });
+        }
+        
+        // Initialize font size range
+        const fontSizeRange = document.getElementById('fontSizeRange');
+        if (fontSizeRange) {
+            // Set initial value
+            const fontSizeLevel = parseInt(localStorage.getItem('fontSizeLevel') || '0');
+            fontSizeRange.value = fontSizeLevel;
+            
+            // Add event listener
+            fontSizeRange.addEventListener('input', function() {
+                const level = parseInt(this.value);
+                document.body.classList.remove('font-size-large', 'font-size-larger');
+                if (level === 1) {
+                    document.body.classList.add('font-size-large');
+                } else if (level === 2) {
+                    document.body.classList.add('font-size-larger');
+                }
+                localStorage.setItem('fontSizeLevel', level);
+            });
+        }
+        
+        // Initialize theme buttons
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        themeBtns.forEach(btn => {
+            // Set initial active state
+            if (btn.getAttribute('data-theme') === savedTheme) {
+                btn.classList.add('active');
+            }
+        });
+    });
+</script>
+{% endblock %} 

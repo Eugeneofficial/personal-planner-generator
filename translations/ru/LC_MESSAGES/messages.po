@@ -1,0 +1,518 @@
+# Russian translations for Personal Planner Generator.
+# Copyright (C) 2025 Personal Planner Generator
+# This file is distributed under the same license as the Personal Planner Generator project.
+msgid ""
+msgstr ""
+"Project-Id-Version: Personal Planner Generator 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# General
+msgid "Personal Planner Generator"
+msgstr "Генератор Персональных Ежедневников"
+
+msgid "Create Your Planner"
+msgstr "Создайте Свой Ежедневник"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Templates"
+msgstr "Шаблоны"
+
+msgid "Home"
+msgstr "Главная"
+
+msgid "AI Suggestions"
+msgstr "ИИ Предложения"
+
+msgid "AI Model"
+msgstr "Модель ИИ"
+
+msgid "Configure API Keys"
+msgstr "Настроить API Ключи"
+
+msgid "Generate Planner"
+msgstr "Создать Ежедневник"
+
+msgid "Privacy"
+msgstr "Конфиденциальность"
+
+msgid "Terms"
+msgstr "Условия"
+
+msgid "Help"
+msgstr "Помощь"
+
+# Index page
+msgid "Customize Your Planner"
+msgstr "Настройте Свой Ежедневник"
+
+msgid "Planner Name"
+msgstr "Название Ежедневника"
+
+msgid "My Personal Planner"
+msgstr "Мой Персональный Ежедневник"
+
+msgid "Planner Size"
+msgstr "Размер Ежедневника"
+
+msgid "Letter (8.5 × 11 in)"
+msgstr "Letter (8.5 × 11 дюймов)"
+
+msgid "Orientation"
+msgstr "Ориентация"
+
+msgid "Portrait"
+msgstr "Портретная"
+
+msgid "Landscape"
+msgstr "Альбомная"
+
+msgid "Start Date"
+msgstr "Дата Начала"
+
+msgid "End Date"
+msgstr "Дата Окончания"
+
+msgid "Cover Image (Optional)"
+msgstr "Изображение Обложки (Опционально)"
+
+msgid "Planner Components"
+msgstr "Компоненты Ежедневника"
+
+msgid "Yearly Overview"
+msgstr "Годовой Обзор"
+
+msgid "Monthly Calendars"
+msgstr "Месячные Календари"
+
+msgid "Weekly Planners"
+msgstr "Недельные Планировщики"
+
+msgid "Daily Pages"
+msgstr "Ежедневные Страницы"
+
+msgid "Goal Trackers"
+msgstr "Трекеры Целей"
+
+msgid "Note Pages"
+msgstr "Страницы для Заметок"
+
+msgid "Design Options"
+msgstr "Параметры Дизайна"
+
+msgid "Color Scheme"
+msgstr "Цветовая Схема"
+
+msgid "Blue"
+msgstr "Синий"
+
+msgid "Purple"
+msgstr "Фиолетовый"
+
+msgid "Green"
+msgstr "Зеленый"
+
+msgid "Pink"
+msgstr "Розовый"
+
+msgid "Minimalist Gray"
+msgstr "Минималистичный Серый"
+
+msgid "Font Style"
+msgstr "Стиль Шрифта"
+
+msgid "Modern"
+msgstr "Современный"
+
+msgid "Classic"
+msgstr "Классический"
+
+msgid "Handwritten"
+msgstr "Рукописный"
+
+msgid "Minimalist"
+msgstr "Минималистичный"
+
+msgid "Layout Style"
+msgstr "Стиль Макета"
+
+msgid "Grid"
+msgstr "Сетка"
+
+msgid "Minimal"
+msgstr "Минимальный"
+
+msgid "Creative"
+msgstr "Творческий"
+
+msgid "Professional"
+msgstr "Профессиональный"
+
+msgid "Additional Elements"
+msgstr "Дополнительные Элементы"
+
+msgid "Inspirational Quotes"
+msgstr "Вдохновляющие Цитаты"
+
+msgid "Habit Tracker"
+msgstr "Трекер Привычек"
+
+msgid "Mood Tracker"
+msgstr "Трекер Настроения"
+
+msgid "Expense Tracker"
+msgstr "Трекер Расходов"
+
+msgid "Reading List"
+msgstr "Список Чтения"
+
+msgid "Hold Ctrl/Cmd to select multiple options"
+msgstr "Удерживайте Ctrl/Cmd для выбора нескольких опций"
+
+msgid "Personal Notes or Special Instructions"
+msgstr "Личные Заметки или Особые Инструкции"
+
+msgid "Any special requests or notes for your planner..."
+msgstr "Любые особые пожелания или заметки для вашего ежедневника..."
+
+msgid "Preview"
+msgstr "Предпросмотр"
+
+msgid "Select components and design options to get AI suggestions for your planner."
+msgstr "Выберите компоненты и параметры дизайна, чтобы получить предложения ИИ для вашего ежедневника."
+
+msgid "Get AI Suggestions"
+msgstr "Получить Предложения ИИ"
+
+msgid "Looking for inspiration? Check out our pre-designed templates."
+msgstr "Ищете вдохновение? Ознакомьтесь с нашими готовыми шаблонами."
+
+msgid "Business"
+msgstr "Бизнес"
+
+msgid "Academic"
+msgstr "Учебный"
+
+msgid "View All Templates"
+msgstr "Просмотреть Все Шаблоны"
+
+msgid "Planner Preview"
+msgstr "Предпросмотр Ежедневника"
+
+msgid "Generating preview..."
+msgstr "Создание предпросмотра..."
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Generating AI suggestions..."
+msgstr "Создание предложений ИИ..."
+
+msgid "Based on your selections, I recommend adding habit trackers and mood trackers to complement your weekly planners. This combination helps track progress on goals while monitoring emotional well-being."
+msgstr "На основе ваших выборов, я рекомендую добавить трекеры привычек и настроения в дополнение к вашим недельным планировщикам. Эта комбинация помогает отслеживать прогресс в достижении целей, одновременно контролируя эмоциональное благополучие."
+
+msgid "I notice you've selected a professional layout. Consider adding expense tracking to enhance your planner's functionality. This would complement your organizational style and provide valuable financial insights."
+msgstr "Я заметил, что вы выбрали профессиональный макет. Рассмотрите возможность добавления отслеживания расходов для расширения функциональности вашего ежедневника. Это дополнит ваш организационный стиль и предоставит ценную финансовую информацию."
+
+msgid "Your planner configuration would benefit from adding reading list pages. Based on your selections, you appear to value comprehensive organization, and this addition would help track your learning goals."
+msgstr "Конфигурация вашего ежедневника выиграет от добавления страниц со списком чтения. Судя по вашим выборам, вы цените комплексную организацию, и это дополнение поможет отслеживать ваши цели в обучении."
+
+msgid "Hey there! Your planner looks great, but it's missing something fun - how about adding inspirational quotes? They'll give you that extra motivation boost when you're planning your week!"
+msgstr "Привет! Ваш ежедневник выглядит отлично, но ему не хватает чего-то интересного - как насчет добавления вдохновляющих цитат? Они дадут вам дополнительный мотивационный импульс при планировании недели!"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Suggestion applied successfully!"
+msgstr "Предложение успешно применено!"
+
+msgid "Monthly Calendar"
+msgstr "Месячный Календарь"
+
+msgid "Weekly Planner"
+msgstr "Недельный Планировщик"
+
+msgid "Daily Page"
+msgstr "Ежедневная Страница"
+
+# Templates page
+msgid "Planner Templates"
+msgstr "Шаблоны Ежедневников"
+
+msgid "Choose from our professionally designed templates to get started quickly. Each template includes pre-configured components tailored for specific needs."
+msgstr "Выберите один из наших профессионально разработанных шаблонов для быстрого начала. Каждый шаблон включает предварительно настроенные компоненты, адаптированные для конкретных потребностей."
+
+msgid "Business Planner"
+msgstr "Бизнес Ежедневник"
+
+msgid "Designed for professionals with meetings, projects, and deadlines. Includes task prioritization and goal tracking."
+msgstr "Разработан для профессионалов с встречами, проектами и сроками. Включает приоритизацию задач и отслеживание целей."
+
+msgid "Weekly Schedule"
+msgstr "Недельное Расписание"
+
+msgid "Meeting Notes"
+msgstr "Заметки о Встречах"
+
+msgid "Project Tracker"
+msgstr "Трекер Проектов"
+
+msgid "Goal Setting"
+msgstr "Постановка Целей"
+
+msgid "Use This Template"
+msgstr "Использовать Этот Шаблон"
+
+msgid "Academic Planner"
+msgstr "Учебный Ежедневник"
+
+msgid "Perfect for students with classes, assignments, and study sessions. Includes grade tracking and semester planning."
+msgstr "Идеально подходит для студентов с занятиями, заданиями и учебными сессиями. Включает отслеживание оценок и планирование семестра."
+
+msgid "Class Schedule"
+msgstr "Расписание Занятий"
+
+msgid "Assignment Tracker"
+msgstr "Трекер Заданий"
+
+msgid "Study Log"
+msgstr "Журнал Учебы"
+
+msgid "Grade Tracker"
+msgstr "Трекер Оценок"
+
+msgid "Fitness Planner"
+msgstr "Фитнес Ежедневник"
+
+msgid "Track workouts, nutrition, and wellness goals. Includes progress tracking and meal planning sections."
+msgstr "Отслеживайте тренировки, питание и цели по оздоровлению. Включает разделы для отслеживания прогресса и планирования питания."
+
+msgid "Workout Log"
+msgstr "Журнал Тренировок"
+
+msgid "Meal Planner"
+msgstr "Планировщик Питания"
+
+msgid "Progress Tracker"
+msgstr "Трекер Прогресса"
+
+msgid "Water Intake"
+msgstr "Потребление Воды"
+
+msgid "Creative Planner"
+msgstr "Творческий Ежедневник"
+
+msgid "For artists, writers, and creators. Includes project tracking, idea collection, and inspiration sections."
+msgstr "Для художников, писателей и творческих людей. Включает отслеживание проектов, сбор идей и разделы для вдохновения."
+
+msgid "Project Timeline"
+msgstr "Временная Шкала Проекта"
+
+msgid "Idea Collection"
+msgstr "Коллекция Идей"
+
+msgid "Inspiration Board"
+msgstr "Доска Вдохновения"
+
+msgid "Creative Goals"
+msgstr "Творческие Цели"
+
+msgid "Mindfulness Planner"
+msgstr "Ежедневник Осознанности"
+
+msgid "Focus on mental health, gratitude, and self-care. Includes mood tracking and reflection prompts."
+msgstr "Фокус на психическом здоровье, благодарности и заботе о себе. Включает отслеживание настроения и подсказки для размышлений."
+
+msgid "Gratitude Journal"
+msgstr "Журнал Благодарности"
+
+msgid "Meditation Log"
+msgstr "Журнал Медитаций"
+
+msgid "Reflection Pages"
+msgstr "Страницы для Размышлений"
+
+msgid "Travel Planner"
+msgstr "Планировщик Путешествий"
+
+msgid "Plan trips, activities, and packing lists. Includes budget tracking and itinerary planning."
+msgstr "Планируйте поездки, мероприятия и списки вещей. Включает отслеживание бюджета и планирование маршрута."
+
+msgid "Itinerary"
+msgstr "Маршрут"
+
+msgid "Packing List"
+msgstr "Список Вещей"
+
+msgid "Budget Tracker"
+msgstr "Трекер Бюджета"
+
+msgid "Travel Journal"
+msgstr "Дневник Путешествий"
+
+msgid "Need a custom planner?"
+msgstr "Нужен индивидуальный ежедневник?"
+
+msgid "If none of these templates fit your needs, you can create a fully customized planner from scratch."
+msgstr "Если ни один из этих шаблонов не соответствует вашим потребностям, вы можете создать полностью индивидуальный ежедневник с нуля."
+
+msgid "Create Custom Planner"
+msgstr "Создать Индивидуальный Ежедневник"
+
+# Settings page
+msgid "API Keys"
+msgstr "API Ключи"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Appearance"
+msgstr "Внешний Вид"
+
+msgid "Configure AI Model API Keys"
+msgstr "Настройка API Ключей Моделей ИИ"
+
+msgid "To use AI features, you need to provide API keys for the AI models you want to use. Your API keys are stored securely and are only used to make requests to the respective AI services."
+msgstr "Для использования функций ИИ вам необходимо предоставить API ключи для моделей ИИ, которые вы хотите использовать. Ваши API ключи хранятся в безопасности и используются только для запросов к соответствующим сервисам ИИ."
+
+msgid "Configured"
+msgstr "Настроено"
+
+msgid "Not Configured"
+msgstr "Не Настроено"
+
+msgid "OpenAI API Key"
+msgstr "API Ключ OpenAI"
+
+msgid "Get your API key from"
+msgstr "Получите ваш API ключ от"
+
+msgid "Base URL (Optional)"
+msgstr "Базовый URL (Опционально)"
+
+msgid "Only change this if you're using a custom OpenAI-compatible API endpoint"
+msgstr "Изменяйте это только если вы используете пользовательскую конечную точку API, совместимую с OpenAI"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Test"
+msgstr "Тест"
+
+msgid "Anthropic API Key"
+msgstr "API Ключ Anthropic"
+
+msgid "Only change this if you're using a custom Claude-compatible API endpoint"
+msgstr "Изменяйте это только если вы используете пользовательскую конечную точку API, совместимую с Claude"
+
+msgid "Google API Key"
+msgstr "API Ключ Google"
+
+msgid "Only change this if you're using a custom Gemini-compatible API endpoint"
+msgstr "Изменяйте это только если вы используете пользовательскую конечную точку API, совместимую с Gemini"
+
+msgid "LM Studio Server URL"
+msgstr "URL Сервера LM Studio"
+
+msgid "Enter the URL of your local LM Studio server. Make sure LM Studio is running with the server enabled."
+msgstr "Введите URL вашего локального сервера LM Studio. Убедитесь, что LM Studio запущен с включенным сервером."
+
+msgid "API Key (Optional)"
+msgstr "API Ключ (Опционально)"
+
+msgid "Leave empty for no authentication"
+msgstr "Оставьте пустым для работы без аутентификации"
+
+msgid "Only required if your LM Studio server is configured to use authentication"
+msgstr "Требуется только если ваш сервер LM Studio настроен на использование аутентификации"
+
+msgid "Test Connection"
+msgstr "Проверить Соединение"
+
+msgid "Language Settings"
+msgstr "Настройки Языка"
+
+msgid "Choose your preferred language for the application interface."
+msgstr "Выберите предпочитаемый язык для интерфейса приложения."
+
+msgid "English language"
+msgstr "Английский язык"
+
+msgid "Russian language"
+msgstr "Русский язык"
+
+msgid "Language changes will take effect immediately."
+msgstr "Изменения языка вступят в силу немедленно."
+
+msgid "Appearance Settings"
+msgstr "Настройки Внешнего Вида"
+
+msgid "Customize the look and feel of the application."
+msgstr "Настройте внешний вид и ощущения от приложения."
+
+msgid "Theme"
+msgstr "Тема"
+
+msgid "Light Mode"
+msgstr "Светлый Режим"
+
+msgid "Dark Mode"
+msgstr "Темный Режим"
+
+msgid "Accessibility"
+msgstr "Доступность"
+
+msgid "High Contrast Mode"
+msgstr "Режим Высокого Контраста"
+
+msgid "Font Size"
+msgstr "Размер Шрифта"
+
+msgid "Normal"
+msgstr "Нормальный"
+
+msgid "Large"
+msgstr "Большой"
+
+msgid "Larger"
+msgstr "Очень Большой"
+
+# Notifications
+msgid "Notification"
+msgstr "Уведомление"
+
+msgid "Please configure API key for this provider in Settings"
+msgstr "Пожалуйста, настройте API ключ для этого провайдера в Настройках"
+
+msgid "AI model changed to"
+msgstr "Модель ИИ изменена на"
+
+# Accessibility
+msgid "Increase font size"
+msgstr "Увеличить размер шрифта"
+
+msgid "Decrease font size"
+msgstr "Уменьшить размер шрифта"
+
+msgid "Toggle high contrast"
+msgstr "Переключить высокий контраст"
+
+msgid "Toggle theme"
+msgstr "Переключить тему"
+
+# Create beautiful, customized planners for your daily productivity with AI assistance
+msgid "Create beautiful, customized planners for your daily productivity with AI assistance"
+msgstr "Создавайте красивые, индивидуальные ежедневники для вашей ежедневной продуктивности с помощью ИИ" 

@@ -1,0 +1,573 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('AI Chat') }} - {{ _('Personal Planner Generator') }}{% endblock %}
+
+{% block page_title %}{{ _('AI Chat Assistant') }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <!-- Chat Interface -->
+        <div class="card chat-card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-robot me-2"></i>{{ _('Chat with AI') }}
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="chatModelDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="currentModelDisplay">
+                            <i class="fas fa-laptop-code me-1" style="color: #ff9800;"></i>
+                            LM Studio
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatModelDropdown">
+                        {% for provider_id, provider in config.AI_MODELS.items() %}
+                        <li>
+                            <a class="dropdown-item chat-model-item" href="#" data-provider="{{ provider_id }}">
+                                <i class="fas {{ provider.icon }} me-2" style="color: {{ provider.color }};"></i>
+                                {{ provider.name }}
+                                {% if masked_keys.get(provider_id, '') %}
+                                <i class="fas fa-check text-success ms-2"></i>
+                                {% else %}
+                                <i class="fas fa-times text-danger ms-2"></i>
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% endfor %}
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ url_for('settings') }}">
+                                <i class="fas fa-key me-2"></i>{{ _('Configure API Keys') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome message -->
+                    <div class="message ai-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>{{ _('Привет! Я ваш AI-ассистент для планирования. Расскажите, что вы хотели бы добавить в свой ежедневник, и я помогу вам его заполнить.') }}</p>
+                            <p>{{ _('Например, вы можете сказать: "Мне нужно запланировать встречу с клиентом завтра в 14:00" или "Добавь в мой ежедневник тренировку на понедельник в 18:00".') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <form id="chatForm" class="d-flex">
+                    <input type="text" class="form-control me-2" id="userMessage" placeholder="{{ _('Введите ваше сообщение...') }}" autocomplete="off">
+                    <button type="submit" class="btn btn-primary" id="sendMessageBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <!-- Planner Preview -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-calendar-alt me-2"></i>{{ _('Ежедневник') }}
+            </div>
+            <div class="card-body">
+                <div id="plannerPreview">
+                    <div class="text-center mb-3">
+                        <h5 id="previewDate"></h5>
+                    </div>
+                    <div class="planner-items" id="plannerItems">
+                        <!-- Planner items will be added here -->
+                        <p class="text-muted text-center">{{ _('Ваш ежедневник пока пуст. Используйте чат, чтобы добавить задачи и события.') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success w-100" id="generatePlannerBtn">
+                    <i class="fas fa-file-pdf me-2"></i>{{ _('Создать PDF') }}
+                </button>
+            </div>
+        </div>
+        
+        <!-- Quick Suggestions -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-lightbulb me-2"></i>{{ _('Быстрые подсказки') }}
+            </div>
+            <div class="card-body">
+                <div class="quick-suggestions">
+                    <button class="btn btn-outline-secondary mb-2 w-100 text-start suggestion-btn">
+                        {{ _('Добавь встречу с командой в 10:00') }}
+                    </button>
+                    <button class="btn btn-outline-secondary mb-2 w-100 text-start suggestion-btn">
+                        {{ _('Запланируй тренировку на вечер') }}
+                    </button>
+                    <button class="btn btn-outline-secondary mb-2 w-100 text-start suggestion-btn">
+                        {{ _('Напомни купить продукты') }}
+                    </button>
+                    <button class="btn btn-outline-secondary mb-2 w-100 text-start suggestion-btn">
+                        {{ _('Добавь задачу: подготовить отчет') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .chat-card {
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
+        max-height: 500px;
+    }
+    
+    .message {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+    
+    .user-message {
+        flex-direction: row-reverse;
+    }
+    
+    .message-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.5rem;
+        flex-shrink: 0;
+    }
+    
+    .user-message .message-avatar {
+        background-color: var(--secondary-color);
+        margin-right: 0;
+        margin-left: 0.5rem;
+    }
+    
+    .message-content {
+        background-color: #f8f9fa;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        max-width: 80%;
+    }
+    
+    .user-message .message-content {
+        background-color: #e9f5ff;
+    }
+    
+    .message-content p:last-child {
+        margin-bottom: 0;
+    }
+    
+    .typing-indicator {
+        display: inline-block;
+    }
+    
+    .typing-indicator span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background-color: #888;
+        border-radius: 50%;
+        margin-right: 3px;
+        animation: typing 1s infinite;
+    }
+    
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+        margin-right: 0;
+    }
+    
+    @keyframes typing {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+    
+    .planner-items {
+        min-height: 200px;
+    }
+    
+    .planner-item {
+        padding: 0.5rem;
+        border-left: 3px solid var(--primary-color);
+        background-color: #f8f9fa;
+        margin-bottom: 0.5rem;
+        border-radius: 0.25rem;
+    }
+    
+    .planner-item-time {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    
+    .planner-item-title {
+        font-weight: 500;
+    }
+    
+    .planner-item-description {
+        font-size: 0.875rem;
+        color: #666;
+    }
+    
+    .suggestion-btn {
+        text-align: left;
+        white-space: normal;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set current date in preview
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('previewDate').textContent = today.toLocaleDateString('{{ session.get("language", "en") }}', options);
+        
+        // Chat functionality
+        const chatForm = document.getElementById('chatForm');
+        const userMessageInput = document.getElementById('userMessage');
+        const chatMessages = document.getElementById('chatMessages');
+        const plannerItems = document.getElementById('plannerItems');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        
+        // Current AI provider
+        let currentProvider = 'lmstudio'; // Default to LM Studio
+        
+        // Planner data
+        let plannerData = [];
+        
+        // Handle chat model selection
+        const chatModelItems = document.querySelectorAll('.chat-model-item');
+        chatModelItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const provider = this.getAttribute('data-provider');
+                
+                // Check if API key is set
+                const hasCheck = this.querySelector('.fa-check');
+                if (!hasCheck) {
+                    showToast('{{ _("Пожалуйста, настройте API ключ для этого провайдера в Настройках") }}', 'warning');
+                    return;
+                }
+                
+                // Set as current model
+                currentProvider = provider;
+                
+                // Update dropdown button
+                const icon = this.querySelector('i:first-child').cloneNode(true);
+                const text = document.createTextNode(this.textContent.trim().split(' ')[0]);
+                
+                const dropdownBtn = document.getElementById('currentModelDisplay');
+                dropdownBtn.innerHTML = '';
+                dropdownBtn.appendChild(icon);
+                dropdownBtn.appendChild(document.createTextNode(' '));
+                dropdownBtn.appendChild(text);
+                
+                showToast(`{{ _("Модель AI изменена на") }} ${text.textContent}`, 'success');
+            });
+        });
+        
+        // Handle form submission
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = userMessageInput.value.trim();
+            if (!message) return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            
+            // Clear input
+            userMessageInput.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Disable send button
+            sendMessageBtn.disabled = true;
+            
+            // Send message to AI
+            sendMessageToAI(message);
+        });
+        
+        // Handle quick suggestions
+        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+        suggestionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const suggestion = this.textContent.trim();
+                userMessageInput.value = suggestion;
+                chatForm.dispatchEvent(new Event('submit'));
+            });
+        });
+        
+        // Handle generate planner button
+        const generatePlannerBtn = document.getElementById('generatePlannerBtn');
+        generatePlannerBtn.addEventListener('click', function() {
+            if (plannerData.length === 0) {
+                showToast('{{ _("Ваш ежедневник пуст. Добавьте задачи через чат.") }}', 'warning');
+                return;
+            }
+            
+            // Create form data for planner generation
+            const formData = new FormData();
+            formData.append('name', 'Мой ежедневник');
+            formData.append('time_range', 'day');
+            formData.append('style', 'minimalist');
+            formData.append('todo', 'on');
+            formData.append('schedule', 'on');
+            
+            // Add planner items as tasks
+            plannerData.forEach(item => {
+                if (item.type === 'task') {
+                    formData.append('tasks', item.title);
+                }
+            });
+            
+            // Submit form to generate planner
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ url_for("generate") }}';
+            form.style.display = 'none';
+            
+            for (const [key, value] of formData.entries()) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+            }
+            
+            document.body.appendChild(form);
+            form.submit();
+        });
+        
+        // Function to add message to chat
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'message-avatar';
+            
+            const icon = document.createElement('i');
+            icon.className = sender === 'user' ? 'fas fa-user' : 'fas fa-robot';
+            avatarDiv.appendChild(icon);
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            // Handle markdown-like formatting
+            let formattedContent = content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+            
+            const paragraph = document.createElement('p');
+            paragraph.innerHTML = formattedContent;
+            contentDiv.appendChild(paragraph);
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Function to show typing indicator
+        function showTypingIndicator() {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ai-message';
+            messageDiv.id = 'typingIndicator';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'message-avatar';
+            
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-robot';
+            avatarDiv.appendChild(icon);
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.innerHTML = '<span></span><span></span><span></span>';
+            
+            contentDiv.appendChild(typingDiv);
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Function to remove typing indicator
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+        
+        // Function to send message to AI
+        function sendMessageToAI(message) {
+            // Prepare request data
+            const requestData = {
+                message: message,
+                provider: currentProvider
+            };
+            
+            // Send request to server
+            fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Remove typing indicator
+                removeTypingIndicator();
+                
+                // Add AI response to chat
+                addMessage(data.response, 'ai');
+                
+                // Update planner if items were added
+                if (data.planner_items && data.planner_items.length > 0) {
+                    updatePlanner(data.planner_items);
+                }
+                
+                // Re-enable send button
+                sendMessageBtn.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error sending message to AI:', error);
+                
+                // Remove typing indicator
+                removeTypingIndicator();
+                
+                // Add error message
+                addMessage('{{ _("Извините, произошла ошибка при обработке вашего запроса. Пожалуйста, попробуйте еще раз.") }}', 'ai');
+                
+                // Re-enable send button
+                sendMessageBtn.disabled = false;
+            });
+        }
+        
+        // Function to update planner preview
+        function updatePlanner(items) {
+            // Add new items to planner data
+            plannerData = [...plannerData, ...items];
+            
+            // Sort items by time if available
+            plannerData.sort((a, b) => {
+                if (a.time && b.time) {
+                    return a.time.localeCompare(b.time);
+                }
+                if (a.time) return -1;
+                if (b.time) return 1;
+                return 0;
+            });
+            
+            // Clear planner preview
+            plannerItems.innerHTML = '';
+            
+            // Add items to planner preview
+            if (plannerData.length === 0) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.className = 'text-muted text-center';
+                emptyMessage.textContent = '{{ _("Ваш ежедневник пока пуст. Используйте чат, чтобы добавить задачи и события.") }}';
+                plannerItems.appendChild(emptyMessage);
+                return;
+            }
+            
+            plannerData.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'planner-item';
+                
+                if (item.type === 'event') {
+                    itemDiv.style.borderLeftColor = '#4A90E2';
+                } else if (item.type === 'task') {
+                    itemDiv.style.borderLeftColor = '#E67E22';
+                } else if (item.type === 'note') {
+                    itemDiv.style.borderLeftColor = '#2ECC71';
+                }
+                
+                let html = '';
+                
+                if (item.time) {
+                    html += `<div class="planner-item-time">${item.time}</div>`;
+                }
+                
+                html += `<div class="planner-item-title">${item.title}</div>`;
+                
+                if (item.description) {
+                    html += `<div class="planner-item-description">${item.description}</div>`;
+                }
+                
+                itemDiv.innerHTML = html;
+                plannerItems.appendChild(itemDiv);
+            });
+        }
+        
+        // Function to show toast notifications
+        function showToast(message, type = 'primary') {
+            const toastContainer = document.createElement('div');
+            toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
+            toastContainer.style.zIndex = '1050';
+            
+            toastContainer.innerHTML = `
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header bg-${type} text-white">
+                        <strong class="me-auto">{{ _("Уведомление") }}</strong>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toastContainer);
+            const toast = new bootstrap.Toast(toastContainer.querySelector('.toast'));
+            toast.show();
+            
+            // Remove toast container after it's hidden
+            toastContainer.querySelector('.toast').addEventListener('hidden.bs.toast', function() {
+                toastContainer.remove();
+            });
+        }
+    });
+</script>
+{% endblock %} 
